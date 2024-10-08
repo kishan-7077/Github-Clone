@@ -3,6 +3,10 @@ const { hideBin } = require("yargs/helpers");
 
 const { initRepo } = require("./controllers/init");
 const { addRepo } = require("./controllers/add");
+const { commitRepo } = require("./controllers/commit");
+const { pushRepo } = require("./controllers/push");
+const { pullRepo } = require("./controllers/pull");
+const { revertRepo } = require("./controllers/revert");
 
 yargs(hideBin(process.argv))
 	.command(
@@ -29,6 +33,56 @@ yargs(hideBin(process.argv))
 		},
 		// method to be called
 		addRepo
+	)
+	.command(
+		// command
+		"commit <messaage>",
+		// description
+		"Commit the stages file",
+		// parameters
+		(yargs) => {
+			yargs.positional("message", {
+				describe: "Commit message",
+				type: "string",
+			});
+		},
+		// method to be called
+		commitRepo
+	)
+	.command(
+		// command
+		"push",
+		// description
+		"Push commits to 53",
+		// parameters
+		{},
+		// method to be called
+		pushRepo
+	)
+	.command(
+		// command
+		"pull",
+		// description
+		"Pull commits to 53",
+		// parameters
+		{},
+		// method to be called
+		pullRepo
+	)
+	.command(
+		// command
+		"revert <commitID>",
+		// description
+		"Revert a specific commit",
+		// parameters
+		(yargs) => {
+			yargs.positional("commitID", {
+				describe: "Commit ID to revert to",
+				type: "string",
+			});
+		},
+		// method to be called
+		revertRepo
 	)
 	.demandCommand(1, "you need atleast one command")
 	.help().argv;
