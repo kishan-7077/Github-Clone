@@ -38,7 +38,7 @@ yargs(hideBin(process.argv))
 	)
 	.command(
 		// command
-		"commit <messaage>",
+		"commit <message>",
 		// description
 		"Commit the stages file",
 		// parameters
@@ -49,7 +49,9 @@ yargs(hideBin(process.argv))
 			});
 		},
 		// method to be called
-		commitRepo
+		(argv) => {
+			commitRepo(argv.message);
+		}
 	)
 	.command(
 		// command
