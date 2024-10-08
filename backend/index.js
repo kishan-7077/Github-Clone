@@ -32,7 +32,9 @@ yargs(hideBin(process.argv))
 			});
 		},
 		// method to be called
-		addRepo
+		(argv) => {
+			addRepo(argv.file);
+		}
 	)
 	.command(
 		// command
